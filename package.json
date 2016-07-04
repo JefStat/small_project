@@ -1,0 +1,28 @@
+{
+  "name": "small_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JefStat/small_project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JefStat/small_project/issues"
+  },
+  "homepage": "https://github.com/JefStat/small_project#readme",
+  "dependencies": {
+    "ether-pudding": "^3.0.3",
+    "rimraf": "^2.5.3",
+    "truffle-default-builder": "^1.0.1",
+    "web3": "^0.17.0-alpha"
+  }
+}

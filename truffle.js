@@ -15,17 +15,16 @@ var rpcConfig = {
 };
 
 var DefaultBuilder = require("truffle-default-builder");
-var PuddingGenerator = require("ether-pudding/generator");
 var Pudding = require("ether-pudding");
 var Web3 = require("web3");
 var web3 = new Web3(new Web3.providers.HttpProvider(
     "http://" + rpcConfig.host + ":" + rpcConfig.port));
-Pudding.setWeb3(web3);
 
 module.exports = {
   build: function (options, callback) {
     var destination = options.contracts_directory;
     var EtherSplitter = require(destination + "/EtherSplitter.sol.js");
+    EtherSplitter.setProvider(web3);
     EtherSplitter.load(Pudding);
 
     // Deploy a EtherSplitter with constructor parameter
@@ -40,7 +39,7 @@ module.exports = {
       // Save the address in the file to be deployed
       EtherSplitter.address = deployedEtherSplitter.address;
       console.log('EtherSplitter: ' + deployedEtherSplitter.address);
-      PuddingGenerator.save({'EtherSplitter': EtherSplitter}, destination);
+      Pudding.save({'EtherSplitter': EtherSplitter}, destination);
     }).then(function () {
       // carry on with the default builder
       var defaultBuilder = new DefaultBuilder(buildConfig, 'build', {});
@@ -51,9 +50,6 @@ module.exports = {
     "MetaCoin",
     "ConvertLib",
     "EtherSplitter"
-  ],
-  after_deploy: [
-      './after_deploy.js'
   ],
   rpc: rpcConfig
 };
