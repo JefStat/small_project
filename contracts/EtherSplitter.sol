@@ -9,8 +9,8 @@ contract EtherSplitter {
         addressB = b;
     }
 
-    function transfer(uint _value) {
-        var halfValue = _value/2;
+    function transfer() {
+        var halfValue = msg.value/2;
         var sendA = addressA.send(halfValue);
         if (!sendA) throw;
         var sendB = addressB.send(halfValue);
