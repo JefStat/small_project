@@ -2,7 +2,7 @@ contract EtherSplitter {
     address public addressA;
     address public addressB;
 
-    event Transfer(uint value);
+    event Transfer(address adr, uint value);
     
     function EtherSplitter(address a, address b) {
         addressA = a;
@@ -10,10 +10,13 @@ contract EtherSplitter {
     }
 
     function transfer(uint _value) {
-        var sendA = addressA.send(_value/2);
+        var halfValue = _value/2;
+        var sendA = addressA.send(halfValue);
         if (!sendA) throw;
-        var sendB = addressB.send(_value/2);
+        var sendB = addressB.send(halfValue);
         if (!sendB) throw;
-        Transfer(_value);
+        Transfer(addressA, halfValue);
+        Transfer(addressB, halfValue);
     }
 }
+
